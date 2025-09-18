@@ -1,0 +1,11 @@
+Remplazar todo del proyecto control+shift+r
+
+Ejecutar el programa shift+F10
+
+Duplicar Linea control +d
+
+Eliminar linea control+y
+
+Mover una linea arriba Alt+shift+ ↑
+
+Mover una linea abajo Alt+shift+ ↓
