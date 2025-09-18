@@ -19,9 +19,13 @@ public class Ejercicio2 {
     public static Map<String,Integer> diasVeces(List<String> dias){
         Map<String, Integer> contador = new HashMap<>();
         for (String dia: dias){
-            if (contador.containsKey(dia)){
+            //Esto es un metodo que simplifica el metodo.
+            contador.put(dia,contador.getOrDefault(dia,0)+1);
+            /* Esto es la forma lógica de hacerlo
+            * if (contador.containsKey(dia)){
                 contador.put(dia,contador.get(dia)+1);
-            }else contador.put(dia,1);
+            }else contador.put(dia,1);*/
+
         }
         return contador;
     }
