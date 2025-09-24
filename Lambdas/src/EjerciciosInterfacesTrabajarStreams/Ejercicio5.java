@@ -1,5 +1,6 @@
 package EjerciciosInterfacesTrabajarStreams;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.Predicate;
@@ -10,7 +11,7 @@ import java.util.function.Predicate;
 * con una letra específica (por ejemplo, "A").*/
 public class Ejercicio5 {
     public static void main(String[] args) {
-        List<String> palabras = Arrays.asList("Pollo","Frito","Lechuga","Tomate","Teclado","Raton");
+        List<String> palabras = new ArrayList<>(Arrays.asList("Pollo","Frito","Lechuga","Tomate","Teclado","Raton"));
         Predicate<String> empiezaCon= palabra-> palabra.startsWith("T");
 
         List<String> filtrados = palabras.stream().filter(empiezaCon).toList();
