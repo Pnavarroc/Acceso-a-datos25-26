@@ -1,0 +1,7 @@
+cambio es un lenguaje de programación interpretado, de alto nivel y muy popular en la actualidad.
+Su principal ventaja es la sencillez de la sintaxis, lo que lo convierte en una excelente opción
+para quienes comienzan a programar. Es un lenguaje multiparadigma, ya que permite programación orientada
+a objetos, programación funcional y estructurada. cambio se utiliza en campos muy variados: desde el desarrollo
+ web con frameworks como Django o Flask, hasta la inteligencia artificial y el análisis de datos con bibliotecas
+  como NumPy, Pandas o TensorFlow. Gracias a su gran comunidad y amplia documentación,
+ aprender cambio es una inversión muy útil para cualquier programador.
