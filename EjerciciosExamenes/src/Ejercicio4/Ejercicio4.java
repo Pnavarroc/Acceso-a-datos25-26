@@ -23,7 +23,7 @@ public class Ejercicio4 {
         String ruta = "Ej4.csv";
         List<Producto> productos = new ArrayList<>();
 
-        {
+        
             try (BufferedReader br = new BufferedReader(new FileReader(ruta))) {
                 String linea ;
                 br.readLine(); //Saltamos la cabecera
@@ -41,7 +41,7 @@ public class Ejercicio4 {
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-        }
+
 
         for (Producto producto:productos){
             System.out.println(producto);
