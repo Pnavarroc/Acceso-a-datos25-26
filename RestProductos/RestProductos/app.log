@@ -1,0 +1,30 @@
+2025-10-23T18:23:22.757+02:00  INFO 9164 --- [RestProductos] [main] o.i.c.R.RestProductosApplication         : Starting RestProductosApplication using Java 24.0.2 with PID 9164 (C:\Users\dam2\Desktop\Acceso-a-datos25-26\RestProductos\RestProductos\target\classes started by dam2 in C:\Users\dam2\Desktop\Acceso-a-datos25-26\RestProductos\RestProductos)
+2025-10-23T18:23:22.760+02:00  INFO 9164 --- [RestProductos] [main] o.i.c.R.RestProductosApplication         : No active profile set, falling back to 1 default profile: "default"
+2025-10-23T18:23:24.327+02:00  INFO 9164 --- [RestProductos] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-10-23T18:23:24.342+02:00  INFO 9164 --- [RestProductos] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-10-23T18:23:24.346+02:00  INFO 9164 --- [RestProductos] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.46]
+2025-10-23T18:23:24.411+02:00  INFO 9164 --- [RestProductos] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-10-23T18:23:24.411+02:00  INFO 9164 --- [RestProductos] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1569 ms
+2025-10-23T18:23:24.565+02:00  WARN 9164 --- [RestProductos] [main] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'usuarioControler': Unsatisfied dependency expressed through field 'usuarioService': No qualifying bean of type 'org.iesch.com.RestProductos.service.UsuarioService' available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
+2025-10-23T18:23:24.570+02:00  INFO 9164 --- [RestProductos] [main] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2025-10-23T18:23:24.585+02:00  INFO 9164 --- [RestProductos] [main] .s.b.a.l.ConditionEvaluationReportLogger : 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2025-10-23T18:23:24.614+02:00 ERROR 9164 --- [RestProductos] [main] o.s.b.d.LoggingFailureAnalysisReporter   : 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Field usuarioService in org.iesch.com.RestProductos.controler.UsuarioControler required a bean of type 'org.iesch.com.RestProductos.service.UsuarioService' that could not be found.
+
+The injection point has the following annotations:
+	- @org.springframework.beans.factory.annotation.Autowired(required=true)
+
+
+Action:
+
+Consider defining a bean of type 'org.iesch.com.RestProductos.service.UsuarioService' in your configuration.
+

@@ -1,6 +1,7 @@
 package org.iesch.com.RestProductos.config;
 
 import org.iesch.com.RestProductos.modelo.Product;
+import org.iesch.com.RestProductos.modelo.Usuario;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -21,6 +22,15 @@ public class Configuracion {
         productos.put(5L,Product.builder().id(5).nombre("Yogurt").price(2.10).descripcion("Yogurt con pepitas de chocolate").category("Alimentación").stock(40).build());
 
         return productos;
+    }
+
+
+    @Bean
+    public Map<Long, Usuario> initUsuarios(){
+        Map<Long,Usuario> usuarios = new HashMap();
+        usuarios.put(1L, Usuario.builder().nombre("Pablo").apellidos("Navarro").direccion("Mi casa").password("Yoquemese12#").build());
+
+        return usuarios;
     }
 
 }

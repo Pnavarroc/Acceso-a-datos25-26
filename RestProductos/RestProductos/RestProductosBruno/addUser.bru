@@ -1,0 +1,21 @@
+meta {
+  name: addUser
+  type: http
+  seq: 7
+}
+
+post {
+  url: http://localhost:8080/usuario
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "nombre":"Pizza",
+    "apellidos":"Margarita",
+    "direccion": "Micasa",
+    "password": "LOquesea"
+  
+  }
+}
