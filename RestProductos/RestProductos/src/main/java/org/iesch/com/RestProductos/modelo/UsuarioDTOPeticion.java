@@ -9,11 +9,8 @@ import lombok.ToString;
 @Setter
 @ToString
 @Builder
-public class Usuario {
-    long id;
-    String nombre;
-    String apellidos;
-    String direccion;
-    String password;
+public class UsuarioDTOPeticion {
 
+    String nombre;
+    String password;
 }

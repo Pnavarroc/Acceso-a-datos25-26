@@ -1,6 +1,6 @@
 package org.iesch.com.RestProductos.controler;
 
-import org.iesch.com.RestProductos.modelo.Usuario;
+import org.iesch.com.RestProductos.modelo.UsuarioDTOPeticion;
 import org.iesch.com.RestProductos.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -15,13 +15,13 @@ import java.util.Map;
 public class UsuarioControler {
 
     @Autowired
-    Map<Long,Usuario>usuarios;
+    Map<Long, UsuarioDTOPeticion>usuarios;
     @Autowired
     UsuarioService usuarioService;
 
     @PostMapping("/usuario")
-    public ResponseEntity<?> registra(@RequestBody Usuario usuario){
-        Usuario usuario1 = usuarioService.addUser(usuario);
+    public ResponseEntity<?> registra(@RequestBody UsuarioDTOPeticion usuario){
+        UsuarioDTOPeticion usuario1 = usuarioService.addUser(usuario);
         URI location = URI.create("/usuario/"+usuario1.getId());
         return ResponseEntity.created(location).body(usuario);
 

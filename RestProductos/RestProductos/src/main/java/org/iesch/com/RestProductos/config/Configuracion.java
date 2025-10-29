@@ -1,13 +1,11 @@
 package org.iesch.com.RestProductos.config;
 
 import org.iesch.com.RestProductos.modelo.Product;
-import org.iesch.com.RestProductos.modelo.Usuario;
+import org.iesch.com.RestProductos.modelo.UsuarioDTOPeticion;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @Configuration
@@ -26,9 +24,9 @@ public class Configuracion {
 
 
     @Bean
-    public Map<Long, Usuario> initUsuarios(){
-        Map<Long,Usuario> usuarios = new HashMap();
-        usuarios.put(1L, Usuario.builder().nombre("Pablo").apellidos("Navarro").direccion("Mi casa").password("Yoquemese12#").build());
+    public Map<Long, UsuarioDTOPeticion> initUsuarios(){
+        Map<Long, UsuarioDTOPeticion> usuarios = new HashMap();
+        usuarios.put(1L, UsuarioDTOPeticion.builder().nombre("Pablo").apellidos("Navarro").direccion("Mi casa").password("Yoquemese12#").build());
 
         return usuarios;
     }

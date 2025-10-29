@@ -9,7 +9,7 @@ import java.util.Map;
 public class UsuarioService {
 
     @Autowired
-    Map<Long,Usuario> usuarios;
+    Map<Long, Usuario> usuarios;
 
     public Usuario addUser(Usuario usuario) {
         Long maxKey = Collections.max(usuarios.keySet());
