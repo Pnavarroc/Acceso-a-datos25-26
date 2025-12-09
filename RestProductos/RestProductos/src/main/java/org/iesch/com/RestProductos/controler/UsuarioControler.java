@@ -21,8 +21,8 @@ public class UsuarioControler {
 
     @PostMapping("/usuario")
     public ResponseEntity<?> registra(@RequestBody UsuarioDTOPeticion usuario){
-        UsuarioDTOPeticion usuario1 = usuarioService.addUser(usuario);
-        URI location = URI.create("/usuario/"+usuario1.getId());
+        UsuarioDTOPeticion usuario1 = usuarioService.addUser(usuario1);
+        URI location = URI.create("/usuario/"+usuario1.getNombre());
         return ResponseEntity.created(location).body(usuario);
 
     }

@@ -1,0 +1,21 @@
+meta {
+  name: ActualizarProductoPorId
+  type: http
+  seq: 4
+}
+
+put {
+  url: http://localhost:8080/producto/5
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+      "name" : "Coño Portatil",
+      "price" : 99.95,
+      "description" : "Es de la madre de berron",
+      "category" : "Informática",
+      "stock" : 2000
+  }
+}
