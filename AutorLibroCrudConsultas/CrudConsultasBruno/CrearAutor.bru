@@ -1,0 +1,23 @@
+meta {
+  name: CrearAutor
+  type: http
+  seq: 1
+}
+
+post {
+  url: http://localhost:8080/api/autores
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+     "nombre": "Susana",
+      "pais": "Marroqui"
+  }
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}
