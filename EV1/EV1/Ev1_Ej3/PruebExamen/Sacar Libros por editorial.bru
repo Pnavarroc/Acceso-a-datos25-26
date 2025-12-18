@@ -1,0 +1,15 @@
+meta {
+  name: Sacar Libros por editorial
+  type: http
+  seq: 4
+}
+
+get {
+  url: http://localhost:8080/api/librosPorEditorial?editorial=Planeta
+  body: none
+  auth: inherit
+}
+
+params:query {
+  editorial: Planeta
+}

@@ -1,0 +1,15 @@
+meta {
+  name: Sacar pedidos por libro
+  type: http
+  seq: 5
+}
+
+get {
+  url: http://localhost:8080/pedidosConLibro?libro=Cien Años De Soledad
+  body: none
+  auth: inherit
+}
+
+params:query {
+  libro: Cien Años De Soledad
+}
