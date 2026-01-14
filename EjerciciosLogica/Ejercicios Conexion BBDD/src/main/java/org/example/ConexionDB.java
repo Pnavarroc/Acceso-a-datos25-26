@@ -41,6 +41,142 @@ public class ConexionDB {
         System.out.println("Consulta 5");
         listarEmpleadosconSalarioMayor1500YDepartamento2();
 
+        System.out.println("Nivel 3 Consulta2");
+        listarEmpleadosDelDepartamentoProduccion();
+
+        System.out.println("Consulta 3");
+        listarEmpleadosDepartamentoComercialOrdenadosPorSalario();
+        System.out.println("Consulta 4");
+        listarEmpleadoCOnSalarioMayor1500YSuDepartamento();
+
+        System.out.println("Consulta 5");
+        listarEmpleadosConDepartamentoOrdenadorPorDepartamentoYSalario();
+
+        System.out.println("Nivel 3.5");
+        listarEmpleadosConSalarioYUnSalarioConSubidaDel20PorCiento();
+    }
+
+    private static void listarEmpleadosConSalarioYUnSalarioConSubidaDel20PorCiento() {
+        String sql= """
+                SELECT nombre, salario FROM empleado 
+                """;
+
+        try(Connection con = DriverManager.getConnection(URL,USER,PASSWD);
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery()
+        ){
+            System.out.println("Sacar empleados con su salario y subida del 20%");
+            System.out.println("Nombre|Salario|Salario con subida del 20%");
+            while (rs.next()){
+                String nombreE = rs.getString("nombre");
+                double salario = rs.getDouble("salario");
+                double salarioSubido = salario*1.20;
+
+                System.out.println(nombreE+" "+salario+" "+salarioSubido);
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private static void listarEmpleadosConDepartamentoOrdenadorPorDepartamentoYSalario() {
+        String sql= """
+                SELECT e.nombre, e.salario, d.nombre FROM empleado e JOIN departamento d ON e.id_departamento=d.id ORDER BY d.nombre,e.salario
+                """;
+
+        try(Connection con = DriverManager.getConnection(URL,USER,PASSWD);
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery()
+        ){
+            System.out.println("Sacar empleados ORDENADOR POR DEP Y SALARIO");
+            System.out.println("Nombre|Salario|NombreDep");
+            while (rs.next()){
+                String nombreE = rs.getString("e.nombre");
+                double salario = rs.getDouble("e.salario");
+                String nombreD = rs.getString("d.nombre");
+
+                System.out.println(nombreE+" "+salario+" "+nombreD);
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private static void listarEmpleadoCOnSalarioMayor1500YSuDepartamento() {
+        String sql= """
+                SELECT e.nombre, e.salario, d.nombre FROM empleado e JOIN departamento d ON e.id_departamento=d.id WHERE e.salario>1500
+                """;
+
+        try(Connection con = DriverManager.getConnection(URL,USER,PASSWD);
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery()
+        ){
+            System.out.println("Sacar empleados con salario mayor de 1500 y su departamento");
+            System.out.println("Nombre|Salario|NombreDep");
+            while (rs.next()){
+                String nombreE = rs.getString("e.nombre");
+                double salario = rs.getDouble("e.salario");
+                String nombreD = rs.getString("d.nombre");
+
+                System.out.println(nombreE+" "+salario+" "+nombreD);
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private static void listarEmpleadosDepartamentoComercialOrdenadosPorSalario() {
+        String sql = """
+                SELECT e.nombre, e.salario, d.nombre FROM empleado e JOIN departamento d ON e.id_departamento=d.id WHERE d.nombre = 'Comercial' ORDER BY e.salario
+                """;
+
+        try(Connection con = DriverManager.getConnection(URL,USER,PASSWD);
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+        ){
+
+            System.out.println("Empleados del departamento Producción:");
+
+            System.out.println("Nombre|Departamento|Salario");
+            while (rs.next()){
+                String nombreEmpleado = rs.getString("e.nombre");
+                double salario = rs.getDouble("e.salario");
+                String nombreDepartamento = rs.getString("d.nombre");
+
+                System.out.println(nombreEmpleado+" "+nombreDepartamento+" "+salario);
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private static void listarEmpleadosDelDepartamentoProduccion() {
+        String sql = """
+                SELECT e.nombre, d.nombre FROM empleado e JOIN departamento d ON e.id_departamento=d.id WHERE d.nombre = 'Produccion'
+                """;
+
+        try(Connection con = DriverManager.getConnection(URL,USER,PASSWD);
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+        ){
+
+            System.out.println("Empleados del departamento Producción:");
+
+            System.out.println("Nombre|Departamento");
+            while (rs.next()){
+                String nombreEmpleado = rs.getString("e.nombre");
+                String nombreDepartamento = rs.getString("d.nombre");
+
+                System.out.println(nombreEmpleado+" "+nombreDepartamento);
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private static void listarEmpleadosconSalarioMayor1500YDepartamento2() {
