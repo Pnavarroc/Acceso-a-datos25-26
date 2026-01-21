@@ -480,25 +480,6 @@ db.libros.aggregate([
 		$match: {
 			prestamo: {$size:0}
 		}
-	},
-	{
-		$lookup: {
-			from: "autores",
-			localField: "autor_id",
-			foreignField: "_id",
-			as: "autor"
-		}
-	},
-	{
-		$unwind: "$autor"
-	},
-	{
-		$project: {
-			"titulo":1,
-			"autor.nombre":1,
-			"año_publicacion":1,
-			"_id":0
-		}
 	}
 
 
