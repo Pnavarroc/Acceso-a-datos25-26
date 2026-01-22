@@ -1,4 +1,4 @@
-package model;
+package org.iesch.MongoDemo_repository.model;
 
 import lombok.*;
 

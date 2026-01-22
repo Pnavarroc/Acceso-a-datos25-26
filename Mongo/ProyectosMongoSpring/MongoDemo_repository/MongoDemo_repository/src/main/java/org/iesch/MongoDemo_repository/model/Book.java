@@ -1,9 +1,10 @@
-package model;
+package org.iesch.MongoDemo_repository.model;
 
 
 import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.util.List;
 @NoArgsConstructor
@@ -14,6 +15,7 @@ import java.util.List;
 @Document(collection = "libros")
 public class Book {
     @Id
+    @Field("_id")
     private String id;
     private String titulo;
     private String isbn;
@@ -36,4 +38,5 @@ public class Book {
         this.autores = autores;
         this.categorias = categorias;
     }
+
 }
