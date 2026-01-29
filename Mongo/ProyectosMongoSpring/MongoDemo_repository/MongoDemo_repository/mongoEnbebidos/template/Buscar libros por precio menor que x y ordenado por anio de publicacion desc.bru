@@ -1,0 +1,15 @@
+meta {
+  name: Buscar libros por precio menor que x y ordenado por anio de publicacion desc
+  type: http
+  seq: 9
+}
+
+get {
+  url: http://127.0.0.1:8080/api/books/template/search/precio-maximo-ordenado?precio=30
+  body: none
+  auth: inherit
+}
+
+params:query {
+  precio: 30
+}

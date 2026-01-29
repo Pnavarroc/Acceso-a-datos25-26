@@ -1,0 +1,16 @@
+meta {
+  name: Buscar libros por titulo y categoria
+  type: http
+  seq: 7
+}
+
+get {
+  url: http://127.0.0.1:8080/api/books/template/search/titulo/categoria?titulo=Cien años de soledad&categoria=Realismo mágico
+  body: none
+  auth: inherit
+}
+
+params:query {
+  titulo: Cien años de soledad
+  categoria: Realismo mágico
+}
