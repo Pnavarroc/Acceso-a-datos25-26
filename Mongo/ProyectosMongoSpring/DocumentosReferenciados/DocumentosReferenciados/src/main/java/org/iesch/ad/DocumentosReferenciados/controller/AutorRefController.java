@@ -69,4 +69,22 @@ public class AutorRefController {
         autoresRefRepository.deleteById(id);
         return ResponseEntity.noContent().build();
     }
+
+    @GetMapping("/search/nombre")
+    public ResponseEntity<List<AutoresRef>> buscarPorNombre(@RequestParam String nombre){
+        return ResponseEntity.ok(autoresRefRepository.findByNombreContainingIgnoreCase(nombre));
+    }
+
+    @GetMapping("/search/nacionalidad")
+    public ResponseEntity<List<AutoresRef>> buscarPorNacionalidad(@RequestParam String nacionalidad){
+        return ResponseEntity.ok(autoresRefRepository.findByNacionalidadContainingIgnoreCase(nacionalidad));
+    }
+
+    //Buscar por varias nacionalidades
+    @PostMapping("/search/nacionalidades")
+    public ResponseEntity<List<AutoresRef>> buscarPorNacionalidades(@RequestBody List<String> nacionalidades){
+        return ResponseEntity.ok(autoresRefRepository.findByNacionalidadIn(nacionalidades));
+    }
+
+
 }

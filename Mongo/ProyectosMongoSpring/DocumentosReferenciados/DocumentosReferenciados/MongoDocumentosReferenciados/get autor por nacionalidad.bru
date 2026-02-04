@@ -1,0 +1,15 @@
+meta {
+  name: get autor por nacionalidad
+  type: http
+  seq: 9
+}
+
+get {
+  url: http://127.0.0.1:8080/api/autores/search/nacionalidad?nacionalidad=España
+  body: none
+  auth: inherit
+}
+
+params:query {
+  nacionalidad: España
+}

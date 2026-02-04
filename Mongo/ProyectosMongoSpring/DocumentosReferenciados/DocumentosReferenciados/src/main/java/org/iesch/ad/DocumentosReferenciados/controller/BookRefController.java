@@ -70,4 +70,18 @@ public class BookRefController {
         bookRefRepository.deleteById(id);
         return ResponseEntity.noContent().build();
     }
+
+
+    //Buscar libros por el id del autor.
+
+    @GetMapping("/search/{autorId}")
+    public ResponseEntity<List<BookRef>> buscarPoridAutor(@PathVariable String autorId){
+        return ResponseEntity.ok(bookRefRepository.findByAutoresId(autorId));
+    }
+
+    //Buscar libros por precio menor a y año publicacion mayor a
+    @GetMapping("/search/precio-anio")
+    public ResponseEntity<List<BookRef>> buscarPorPrecioMenorYAnioPublicacionMayor(@RequestParam Double precio, @RequestParam Integer anio){
+        return ResponseEntity.ok(bookRefRepository.buscarPorPrecioInferiorYanioSuperior(precio, anio));
+    }
 }

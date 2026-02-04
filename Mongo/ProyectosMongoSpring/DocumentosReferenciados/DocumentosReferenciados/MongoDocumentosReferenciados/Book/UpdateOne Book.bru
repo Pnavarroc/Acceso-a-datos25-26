@@ -1,0 +1,37 @@
+meta {
+  name: UpdateOne Book
+  type: http
+  seq: 8
+}
+
+put {
+  url: http://127.0.0.1:8080/api/books-ref/69836fa4435b201270363e87
+  body: json
+  auth: inherit
+}
+
+body:json {
+  
+    {
+      "anioPublicacion": 1967,
+      "autores": [
+        {
+          "id": "60a1b1c1e4b0a1c1e4b0a1c2",
+          "nacionalidad": "España",
+          "nombre": "Miguel de Payanes"
+        }
+      ],
+      "categorias": [
+        "Ficción",
+        "Realismo mágico",
+        "Literatura latinoamericana"
+      ],
+      "editorial": "Editorial Sudamericana",
+      "id": "69836fa4435b201270363e87",
+      "isbn": "123456789GHS",
+      "numeroPaginas": 417,
+      "precio": 18.5,
+      "titulo": "La Panacea"
+    }
+  
+}
