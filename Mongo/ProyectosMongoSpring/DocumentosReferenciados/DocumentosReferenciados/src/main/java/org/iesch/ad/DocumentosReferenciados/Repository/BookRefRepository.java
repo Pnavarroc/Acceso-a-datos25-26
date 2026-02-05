@@ -1,6 +1,7 @@
 package org.iesch.ad.DocumentosReferenciados.Repository;
 
 import org.iesch.ad.DocumentosReferenciados.model.BookRef;
+import org.jspecify.annotations.Nullable;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -20,4 +21,7 @@ public interface BookRefRepository extends MongoRepository<BookRef,String> {
 
     @Query("{'precio': {$lte: ?0}, 'anioPublicacion': {$gte: ?1}}")
     List<BookRef> buscarPorPrecioInferiorYanioSuperior(Double precio, Integer anio);
+
+    @Query("{$or: [{'precio': {$lt: ?0}}, {'anioPublicacion': {$lt: ?1} }  ]}'")
+    List<BookRef> buscarLibrosEconomicosOAntiguos(Double precio, Integer anio);
 }

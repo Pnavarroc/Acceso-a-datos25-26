@@ -1,0 +1,15 @@
+meta {
+  name: Buscar libros por nombre del autor
+  type: http
+  seq: 5
+}
+
+get {
+  url: http://127.0.0.1:8080/api/books-ref/template/search/autor-nombre?nombreAutor=Dan
+  body: none
+  auth: inherit
+}
+
+params:query {
+  nombreAutor: Dan
+}

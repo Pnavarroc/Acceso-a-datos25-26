@@ -1,6 +1,12 @@
 package org.iesch.ad.DocumentosReferenciados.controller;
 
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import io.swagger.v3.oas.annotations.tags.Tags;
 import org.iesch.ad.DocumentosReferenciados.Repository.BookRefRepository;
 
 import org.iesch.ad.DocumentosReferenciados.model.BookRef;
@@ -12,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
+@Tag(name = "Book", description = "Esto es la descripcion")
 @RestController
 @RequestMapping("api/books-ref")
 public class BookRefController {
@@ -23,14 +30,26 @@ public class BookRefController {
 
     //Get all
     //Get api/books-ref
+
+    @Operation(summary = "Obtener todos los libros", description = "Devuelve la lista completa de libros referenciados")
+    @ApiResponses(value = {
+            @ApiResponse( responseCode = "200", description ="Se encuentran los libros correctamente")
+    })
     @GetMapping
     public ResponseEntity<List<BookRef>> getAllBooks(){
         return ResponseEntity.ok(bookRefRepository.findAll());
     }
 
     //GetOne
+    @Operation(summary = "Obtener un libro dado su id", description = "Devuelve un libro")
+    @ApiResponses(value = {
+            @ApiResponse( responseCode = "200", description ="Se encuentra el libro correctamente"),
+            @ApiResponse(responseCode = "404", description = "Libro no encontrado")
+    })
     @GetMapping("/{id}")
-    public ResponseEntity<BookRef> getOneBooks(@PathVariable String id){
+    public ResponseEntity<BookRef> getOneBooks(
+            @Parameter(description = "Id del libro", required = true, example = "sldjhfal3q42423lk23")
+            @PathVariable String id){
         Optional<BookRef> book = bookRefRepository.findById(id);
         return book.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
     }
@@ -83,5 +102,12 @@ public class BookRefController {
     @GetMapping("/search/precio-anio")
     public ResponseEntity<List<BookRef>> buscarPorPrecioMenorYAnioPublicacionMayor(@RequestParam Double precio, @RequestParam Integer anio){
         return ResponseEntity.ok(bookRefRepository.buscarPorPrecioInferiorYanioSuperior(precio, anio));
+    }
+
+    //Buscar los libros mas baratos de x o que sean más antiguos a un determinado año
+
+    @GetMapping("/search/economicos-antiguos")
+    public ResponseEntity<List<BookRef>> buscarPorBaratosOantiguos(@RequestParam Double precio, @RequestParam Integer anio){
+        return ResponseEntity.ok(bookRefRepository.buscarLibrosEconomicosOAntiguos(precio, anio));
     }
 }
