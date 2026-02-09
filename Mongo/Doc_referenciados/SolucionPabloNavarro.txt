@@ -1,0 +1,302 @@
+Documentos referenciados.
+¿Cuándo usar un diseño con documentos embebidos?
+ Datos que siempre se consultan juntos
+ Relación uno-a-pocos (1 estudiante → 3-5 materias)
+ Datos que no se comparten entre documentos
+¿Cuándo usar un diseño con documentos referenciados?
+ Datos que se consultan independientemente
+ Relación uno-a-muchos (1 autor → muchos libros)
+ Datos que se reutilizan (muchos libros del mismo autor)
+ Evitar duplicación de datos
+Conceptos clave:
+- $lookup: El JOIN de MongoDB
+- $unwind: Deshacer arrays
+- $match: Filtrar (antes o después de lookup)
+- $group: Agrupar y agregar
+- $project: Seleccionar campos
+- $sort: Ordenar
+- $limit: Limitar resultados
+- $size: Tamaño de array
+Ejercicios:
+1. Ver todos los libros
+
+db.libros.find()
+
+2. Buscar un autor específico ej: id 1
+
+db.autores.find({
+    _id:1
+})
+
+3. Buscar los libros de un autor específico ej: autor con id 1
+
+db.libros.find({
+    autor_id:1
+})
+
+4. Busca todos los libros pero debes mostrar toda la información del autor
+
+db.libros.aggregate([
+    {
+        $lookup: {
+            from: "autores",
+            localField: "autor_id",
+            foreignField: "_id",
+            as: "InfoAutor"
+        }
+    }
+])
+
+5. Busca todos los libros pero debes mostrar toda la información del autor, esta vez sin
+array
+
+db.libros.aggregate([
+    {
+        $lookup: {
+            from: "autores",
+            localField: "autor_id",
+            foreignField: "_id",
+            as: "InfoAutor"
+        }
+        
+    },
+    {$unwind: "$InfoAutor"}
+])
+
+6. Saca toda la información de los libros, con sus autores y sus editoriales. Sin Array
+
+db.libros.aggregate([
+    {
+        $lookup:{
+            from :"autores",
+            localField:"autor_id",
+            foreignField: "_id",
+            as : "InfoAutor"
+        }
+    },
+    {
+        $lookup:{
+            from: "editoriales",
+            localField:"editorial_id",
+            foreignField: "_id",
+            as : "InfoEditorial"
+        }
+    }
+])
+
+7. Busca la información relativa a los préstamos existentes, pero debes mostrar la
+información de los libros, autores y usuarios.
+
+db.prestamos.aggregate([
+    {
+        $lookup:{
+            from : "libros",
+            localField: "libro_id",
+            foreignField: "_id",
+            as : "libroInfo"
+        }
+    },
+    {
+        $lookup: {
+            from : "autores",
+            localField: "libroInfo.autor_id",
+            foreignField: "_id",
+            as: "autorInfo"
+        }
+    },
+    {
+        $lookup: {
+            from : "usuarios",
+            localField: "usuario_id",
+            foreignField: "_id",
+            as: "usuarioInfo"
+        }
+    },
+    {$unwind: "$libroInfo"},
+    {$unwind: "$autorInfo"},
+    {$unwind: "$usuarioInfo"}
+])
+
+8. Encuentra los libros de autores con premio Nobel
+
+db.libros.aggregate([
+    {
+        $lookup:{
+            from :"autores",
+            localField: "autor_id",
+            foreignField: "_id",
+            as:"autor"
+        }
+    },
+    {
+        $match: {"autor.premios": "Nobel"}
+    },
+    {$unwind: "$autor"}
+
+])
+
+9. Muestra el total de libros por editorial
+
+db.libros.aggregate([
+    {
+        $lookup: {
+            from: "editoriales",
+            localField: "editorial_id",
+            foreignField: "_id",
+            as: "editorial"
+        }
+    },
+    {
+        $group:{
+            _id: "$editorial",
+            totalLibros: {$sum:1}
+        }
+    }
+])
+
+10. Encuentra los préstamos no devueltos muestra la información completa.
+
+db.prestamos.aggregate([
+    {
+        $match: {devuelto:false}
+    },
+    {
+        $lookup:{
+            from : "libros",
+            localField:"libro_id",
+            foreignField: "_id",
+            as: "libro"
+        }
+    },
+    {
+        $lookup:{
+            from : "usuarios",
+            localField:"usuario_id",
+            foreignField: "_id",
+            as: "usuario"
+        }
+    },
+    {
+        $lookup:{
+            from : "autores",
+            localField:"libro.autor_id",
+            foreignField: "_id",
+            as: "autor"
+        }
+    },
+    {$unwind: "$libro"},
+    {$unwind: "$usuario"},
+    {$unwind: "$autor"}
+    
+])
+
+11. Encuentra el autor con más libros publicados
+
+db.libros.aggregate([
+    {
+        $group:{
+            _id:"$autor_id",
+            total_libros: {$sum: 1}
+        }
+    },
+    {
+        $lookup: {
+            from: "autores",
+            localField: "_id",
+            foreignField: "_id",
+            as: "autor"
+        }
+    },
+    {$unwind: "$autor"},
+    {
+        $project:{
+            "autor.nombre":1,
+            "total_libros":1,
+            _id:0
+        }
+    }
+
+])
+
+12. Encuentra los usuarios Premium con sus préstamos activos.
+
+db.usuarios.aggregate([
+    {
+        $match:{
+            "tipo": "premium"
+        }
+    },
+    {
+        $lookup:{
+            from: "prestamos",
+            localField: "_id",
+            foreignField:"usuario_id",
+            as: "prestamo"
+        }
+    },
+    {$unwind: "$prestamo"},
+    {
+        $match:{
+            "prestamo.devuelto": false
+        }
+    },
+    {
+        $project:{
+            "nombre":1,
+            "tipo":1,
+            "prestamo.devuelto":1,
+            _id:0
+
+        }
+    }
+])
+
+13. Muestra los libros publicados antes de 1970 con su autor y editorial
+
+db.libros.aggregate([
+    {
+        $match:{
+            "año_publicacion": {$lt:1970}
+        }
+    },
+    {
+        $lookup:{
+            from: "autores",
+            localField: "autor_id",
+            foreignField: "_id",
+            as: "autor"
+        }
+    },
+    {
+        $lookup:{
+            from: "editoriales",
+            localField: "editorial_id",
+            foreignField: "_id",
+            as: "editorial"
+        }
+    },
+    {
+        $unwind: "$autor"
+    },
+    {
+        $unwind: "$editorial"
+    }
+])
+
+14. Encuentra el promedio de páginas por género
+
+db.libros.aggregate([
+	{
+		$group: {
+			_id: "$genero",
+			promedio_paginas: {$avg: "$paginas"},
+			cantidad_libros: {$sum: 1}
+		}
+	}
+])
+
+15. Muestra los autores argentinos con sus libros y total de páginas
+16. Encuentra los usuarios con más de 1 préstamo tanto los activos o los históricos
+
+17. Muestra la editorial con el libro más largo y su autor
+18. Encuentra los libros que nunca han sido prestados.
