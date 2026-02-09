@@ -2,7 +2,7 @@
   {
     "_id": 101,
     "titulo": "Cien años de soledad",
-    "autor_id": 1,  
+    "autor_id": 1, 
     "genero": "Realismo mágico",
     "año_publicacion": 1967,
     "paginas": 471,
