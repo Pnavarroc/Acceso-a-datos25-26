@@ -1,0 +1,15 @@
+meta {
+  name: get libros por paginas
+  type: http
+  seq: 10
+}
+
+get {
+  url: http://127.0.0.1:8080/api/libros/paginas?paginas=400
+  body: none
+  auth: inherit
+}
+
+params:query {
+  paginas: 400
+}

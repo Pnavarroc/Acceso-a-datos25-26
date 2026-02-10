@@ -1,0 +1,15 @@
+meta {
+  name: get libros por año
+  type: http
+  seq: 9
+}
+
+get {
+  url: http://127.0.0.1:8080/api/libros/anio?anio=1980
+  body: none
+  auth: inherit
+}
+
+params:query {
+  anio: 1980
+}

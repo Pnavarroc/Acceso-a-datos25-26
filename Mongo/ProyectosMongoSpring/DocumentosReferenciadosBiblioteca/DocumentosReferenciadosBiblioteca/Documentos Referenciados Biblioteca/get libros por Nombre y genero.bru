@@ -1,0 +1,16 @@
+meta {
+  name: get libros por Nombre y genero
+  type: http
+  seq: 11
+}
+
+get {
+  url: http://127.0.0.1:8080/api/libros/nombreAutor/genero?nombreAutor=Gabriel García Márquez&genero=400
+  body: none
+  auth: inherit
+}
+
+params:query {
+  nombreAutor: Gabriel García Márquez
+  genero: 400
+}

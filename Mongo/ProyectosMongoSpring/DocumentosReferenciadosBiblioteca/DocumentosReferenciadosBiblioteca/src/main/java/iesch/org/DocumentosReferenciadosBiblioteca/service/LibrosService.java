@@ -63,4 +63,28 @@ public class LibrosService {
         // 3. Si no existe, devolvemos null
         return null;
     }
+
+    public List<Libros> conseguirLibrosPorNombreAutor(String nombreAutor){
+
+        return libroRepository.findByAutoresNombre(nombreAutor);
+
+    }
+
+
+    public @Nullable List<Libros> listarLibrosPorGenero(String genero) {
+        return libroRepository.findByGenero(genero);
+    }
+
+    public @Nullable List<Libros> mostrarLibrosPublicadosDespuesDe(Integer anio) {
+        return libroRepository.findByAnioPublicacionGreaterThan(anio);
+    }
+
+    public @Nullable List<Libros> mostrarLibrosPorPaginas(Integer paginas) {
+        return libroRepository.findByPaginasGreaterThan(paginas);
+    }
+
+
+    public @Nullable List<Libros> mostrarLibrosPorNombreAutorYGenero(String nombreAutor, String genero) {
+        return libroRepository.findByAutoresNombreYGenero(nombreAutor,genero);
+    }
 }
