@@ -1,0 +1,18 @@
+meta {
+  name: DeleteOne
+  type: http
+  seq: 6
+}
+
+delete {
+  url: http://127.0.0.1:8080/api/autores/697b949b0f4d330da674390d
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "nombre":"Pablo Navarro",
+    "nacionalidad":"Español"
+  }
+}

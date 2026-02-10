@@ -1,0 +1,37 @@
+meta {
+  name: CreateOne Book
+  type: http
+  seq: 7
+}
+
+post {
+  url: http://127.0.0.1:8080/api/books-ref
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "titulo":"El arte de la guerra",
+    "isbn": "123456789GHSasdasd",
+    "anioPublicacion": 1967,
+    "precio": 18.5,
+    "numeroPaginas": 417,
+    "editorial": "Editorial Sudamericana",
+  
+    "autores":[
+        {
+          "nacionalidad": "Chino",
+          "nombre": "Sun Tzu"
+        }
+    ],
+    
+    "categorias":[
+      "Ficción",
+      "Realismo mágico",
+      "Literatura latinoamericana"
+      ]
+      
+  }
+  
+}

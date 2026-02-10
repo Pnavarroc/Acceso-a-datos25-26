@@ -1,0 +1,18 @@
+meta {
+  name: UpdateOne
+  type: http
+  seq: 5
+}
+
+put {
+  url: http://127.0.0.1:8080/api/autores/697b949c0f4d330da674390e
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "nombre":"Pablo Navarro",
+    "nacionalidad":"Español"
+  }
+}

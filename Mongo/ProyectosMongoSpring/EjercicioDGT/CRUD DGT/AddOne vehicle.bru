@@ -1,0 +1,42 @@
+meta {
+  name: AddOne vehicle
+  type: http
+  seq: 4
+}
+
+post {
+  url: http://127.0.0.1:8080/api/vehiculos
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "matricula": "9999ZZZ",
+    "bastidor": "TESTBAS987654321",
+    "marca": "Seat",
+    "modelo": "Ibiza",
+    "color": "Rojo",
+    "tipoVehiculo": "TURISMO",
+    "anioFabricacion": 2024,
+    "caracteristicasTecnicas": {
+      "cilindrada": 999,
+      "potencia": 95
+    },
+    "titular": {
+      "dni": "12345678A",
+      "nombre": "Juan",
+      "apellidos": "Pérez"
+    },
+    "itv": {
+      "enVigor": true,
+      "eITV": "e-ITV-2024-NEW-999999"
+    }
+  }
+  
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

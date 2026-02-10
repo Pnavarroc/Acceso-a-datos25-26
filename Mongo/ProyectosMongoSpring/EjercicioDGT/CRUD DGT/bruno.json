@@ -1,0 +1,9 @@
+{
+  "version": "1",
+  "name": "CRUD DGT",
+  "type": "collection",
+  "ignore": [
+    "node_modules",
+    ".git"
+  ]
+}
