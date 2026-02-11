@@ -44,4 +44,8 @@ public class BookRef {
         this.autores = autores;
         this.categorias = categorias;
     }
+
+    public void setId(String id) {
+
+    }
 }

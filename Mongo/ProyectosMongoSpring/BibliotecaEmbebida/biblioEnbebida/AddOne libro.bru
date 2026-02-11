@@ -1,0 +1,39 @@
+meta {
+  name: AddOne libro
+  type: http
+  seq: 4
+}
+
+post {
+  url: http://127.0.0.1:8080/api/libros
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "anioPublicacion": 2020,
+    "autores": [
+      {
+        "nombre": "Pablo Navarro",
+        "nacionalidad": "España"
+      }
+    ],
+    "categorias": [
+      "Clásicos",
+      "Ficción",
+      "Aventura"
+    ],
+    "editorial": "Real Academia Española",
+    "id": "2566CPK",
+    "isbn": "2180huytZ",
+    "numeroPaginas": 300,
+    "precio": 25.0,
+    "titulo": "FUmeta por siempre"
+  }
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

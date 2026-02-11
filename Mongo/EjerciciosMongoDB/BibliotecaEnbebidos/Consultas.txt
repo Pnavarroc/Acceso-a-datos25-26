@@ -1,0 +1,257 @@
+🔹 NIVEL 1 – Básicas pero obligatorias
+1️⃣ Buscar libros publicados después del año 2000
+
+👉 Campo simple + operador $gt
+
+
+db.libros.find(
+    {anioPublicacion: {$gt: 2000}}
+)
+
+2️⃣ Buscar libros con precio menor a 20€
+
+👉 $lt
+
+db.libros.find(
+    {precio: {$lt: 20}}
+)
+
+3️⃣ Buscar libros con más de 400 páginas
+
+👉 $gt sobre numeroPaginas
+
+db.libros.find(
+    {numeroPaginas: {$gt:400}}
+)
+
+4️⃣ Buscar libros cuya editorial sea "Addison-Wesley"
+
+👉 Igualdad simple
+
+db.libros.find(
+    {editorial: "Addison-Wesley"}
+)
+
+🔹 NIVEL 2 – Arrays de strings
+5️⃣ Buscar libros que pertenezcan a la categoría "Programación"
+
+👉 Campo categorias (array de strings)
+
+db.libros.find(
+    {categorias: "Programación" }
+)
+
+6️⃣ Buscar libros que tengan la categoría "Ficción" Y "Misterio"
+
+👉 Aquí hay que pensar bien
+No es igual que una sola categoría.
+
+db.libros.find(
+    {categorias: {$all["Ficción","Misterio"]}}
+)
+
+🔹 NIVEL 3 – Arrays embebidos (autores)
+7️⃣ Buscar libros cuyo autor sea "George Orwell"
+
+👉 autores.nombre
+
+db.libros.find(
+    {"autores.nombre": "George Orwell"}
+)
+
+8️⃣ Buscar libros escritos por autores de nacionalidad "Estados Unidos"
+
+👉 Campo embebido dentro de array
+
+db.libros.find(
+    {"autores.nacionalidad": "Estados Unidos"}
+)
+
+9️⃣ Buscar libros que tengan MÁS DE UN autor
+
+👉 $size o combinación lógica
+
+db.libros.find(
+    {"autores.1": {$exists: true}}
+)
+
+🔹 NIVEL 4 – Más examen puro
+🔟 Mostrar solo:
+
+titulo
+
+precio
+
+y ocultar _id
+
+👉 Proyección
+
+
+db.libros.aggregate([
+    {
+        $project:{
+            "titulo":1,
+            "precio":1,
+            "_id":0
+        }
+    }
+])
+
+🔥 BONUS (si te sobra tiempo)
+11️⃣ Calcular el precio promedio de todos los libros
+
+👉 aggregate
+👉 $group
+👉 $avg
+
+
+
+🔥 NIVEL EXAMEN – Aggregate y Cálculos
+1️⃣ Calcular el número total de libros
+
+👉 Debe devolver solo el número total.
+
+Pista:
+
+$count
+
+o $group
+
+db.libros.aggregate([
+    {
+        $group:{
+            "_id":1,
+            numeroLibros: {$sum:1}
+        }
+    },
+    {
+        $project:{
+            "_id":0
+        }
+    }
+])
+
+2️⃣ Calcular el precio promedio de los libros publicados después del año 2000
+
+👉 Aquí ya hay:
+
+$match
+
+$group
+
+$avg
+
+db.libros.aggregate([
+    {
+        $match:{
+           "anioPublicacion": {$gt:2000}
+        }
+    },
+    {
+        $group:{
+            "_id":1
+            precioPromedio:{$avg:"$precio"}
+        }
+    },
+    {
+        $project:{
+            "_id":0
+        }
+    }
+])
+
+3️⃣ Obtener el libro más caro
+
+👉 Debe mostrar:
+
+título
+
+precio
+
+Pista:
+
+$sort
+
+$limit
+
+db.libros.aggregate([
+    {
+        $sort: {"precio":-1}
+    },
+    {
+        $limit:1
+    },
+    {
+        $project:{
+            "titulo":1,
+            "precio":1,
+            "_id":0
+        }
+    }
+])
+
+4️⃣ Mostrar el número de libros por editorial
+
+👉 Resultado esperado tipo:
+
+Addison-Wesley → 2
+Planeta → 1
+...
+
+
+Pista:
+
+$group
+
+_id: "$editorial"
+
+$sum: 1
+
+db.libros.aggregate([
+    {
+        $group:{
+            "_id":"$editorial",
+            numeroLibros: {$sum:1}
+        }
+    }
+])
+
+5️⃣ Calcular el precio promedio por categoría
+
+👉 Esta es la más potente.
+
+Resultado esperado tipo:
+
+Programación → promedio X
+Ficción → promedio Y
+...
+
+
+Pista:
+
+$unwind
+
+$group
+
+$avg
+
+db.libros.aggregate([
+    {
+        $unwind: "$categorias"
+    },
+    {
+        $group:{
+            _id:"$categorias",
+            precioMedio: {$avg:"$precio"}
+        }
+    },
+    {
+        $project:{
+            categoria:"$_id",
+            precioMedio:1,
+            _id:0
+        }
+    }
+])
+
+🔥 Esta es MUY de examen.

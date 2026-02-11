@@ -1,0 +1,21 @@
+meta {
+  name: libros por nombre y nacionalidad
+  type: http
+  seq: 14
+}
+
+get {
+  url: http://127.0.0.1:8080/api/libros/search/nombre/nacionalidad?nombre=George Orwell&nacionalidad=Reino Unido
+  body: none
+  auth: inherit
+}
+
+params:query {
+  nombre: George Orwell
+  nacionalidad: Reino Unido
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

@@ -1,0 +1,20 @@
+meta {
+  name: libros por precio mayor a
+  type: http
+  seq: 7
+}
+
+get {
+  url: http://127.0.0.1:8080/api/libros/search/precio?precio=40
+  body: none
+  auth: inherit
+}
+
+params:query {
+  precio: 40
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

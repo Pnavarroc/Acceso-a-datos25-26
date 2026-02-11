@@ -1,0 +1,282 @@
+🔹 NIVEL 1 – Sin lookup (calentar)
+1️⃣ Buscar libros publicados después del 2010.
+
+db.libros_ref.find(
+    {anioPublicacion: {$gt: 2010}}
+)
+
+2️⃣ Buscar libros cuyo precio sea mayor a 40€.
+
+db.libros_ref.find(
+    {precio: {$gt: 40}}
+)
+
+3️⃣ Buscar libros que tengan más de un autor.
+
+(Pista: array de ObjectId)
+
+db.libros_ref.find(
+    {"autores.1": {$exists:true}}
+)
+
+4️⃣ Buscar autores de nacionalidad "Estados Unidos".
+
+db.autores.find(
+    {nacionalidad: "Estados Unidos"}
+)
+
+5️⃣ Mostrar solo el nombre y nacionalidad de los autores.
+
+(Proyección)
+
+db.autores.aggregate([
+    {
+        $project:{
+            "nombre":1,
+            "nacionalidad":1
+        }
+    }
+])
+
+🔹 NIVEL 2 – Primeros $lookup
+6️⃣ Mostrar cada libro junto con los datos completos de sus autores.
+
+(Pista: $lookup)
+
+db.libros_ref.aggregate([
+    {
+        $lookup:{
+            from: "autores",
+            localField: "autores",
+            foreignField:"_id",
+            as : "autor"
+        }
+    }
+])
+
+7️⃣ Mostrar solo:
+
+título
+
+nombre del autor
+
+(Usando $lookup + $project)
+
+db.libros_ref.aggregate([
+    {
+        $lookup:{
+            from: "autores",
+            localField: "autores",
+            foreignField:"_id",
+            as : "autor"
+        }
+    },
+    {
+        $project:{
+            "titulo":1,
+            "autor.nombre":1,
+            "_id":0
+        }
+    }
+])
+
+8️⃣ Mostrar libros cuyos autores sean de "España".
+
+(Pista: $lookup → $match sobre campo del autor)
+
+db.libros_ref.aggregate([
+    {
+        $lookup:{
+            from: "autores",
+            localField: "autores",
+            foreignField:"_id",
+            as : "autor"
+        }
+    },
+    {
+        $match:{
+            "autor.nacionalidad":"España"
+        }
+    },
+    {
+        $project:{
+            "titulo":1,
+            "autor.nombre":1,
+            "autor.nacionalidad":1,
+            "_id":0
+        }
+    }
+])
+
+9️⃣ Obtener libros escritos por autores de "Estados Unidos".
+
+(Ojo con el orden de $lookup y $match)
+
+db.libros_ref.aggregate([
+    {
+        $lookup:{
+            from: "autores",
+            localField: "autores",
+            foreignField:"_id",
+            as : "autor"
+        }
+    },
+    {
+        $match:{
+            "autor.nacionalidad":"Estados Unidos"
+        }
+    },
+    {
+        $project:{
+            "titulo":1,
+            "autor.nombre":1,
+            "autor.nacionalidad":1,
+            "_id":0
+        }
+    }
+])
+
+🔟 Mostrar los libros junto con el número de autores que tienen.
+
+(Pista: $size después del $lookup)
+
+db.libros_ref.aggregate([
+    {
+        $project:{
+            "titulo":1,
+            numeroAutores: {$size:"$autores"},
+            "_id":0
+        }
+    }
+])
+
+🔥 NIVEL 3 – Aggregate más interesante
+11️⃣ Contar cuántos libros hay por nacionalidad de autor.
+
+Resultado tipo:
+
+Estados Unidos → X
+España → Y
+
+db.libros_ref.aggregate([
+    {
+        $lookup:{
+            from: "autores",
+            localField:"autores",
+            foreignField:"_id",
+            as :"autor"
+        }
+    },
+    {$unwind: "$autor"},
+    {
+        $group:{
+            _id:"$autor.nacionalidad",
+            numeroLibros: {$sum:1}
+        }
+    }
+
+])
+
+
+(Pista: $lookup + $unwind + $group)
+
+12️⃣ Calcular el precio promedio de los libros por nacionalidad de autor.
+
+db.libros_ref.aggregate([
+    {
+        $lookup:{
+            from: "autores",
+            localField:"autores",
+            foreignField:"_id",
+            as :"autor"
+        }
+    },
+    {$unwind: "$autor"},
+    {
+        $group:{
+            _id:"$autor.nacionalidad",
+            promedio: {$avg:"$precio"}
+        }
+    }
+
+])
+
+13️⃣ Obtener el autor que ha participado en más libros.
+
+(Pista: agrupar por _id del autor)
+db.libros_ref.aggregate([
+    { $unwind: "$autores" },
+    {
+        $group:{
+            _id:"$autores",
+            numeroLibros: {$sum:1}
+        }
+    },
+    { $sort:{ numeroLibros:-1 } },
+    { $limit:1 },
+    {
+        $lookup:{
+            from:"autores",
+            localField:"_id",
+            foreignField:"_id",
+            as:"autor"
+        }
+    },
+    { $unwind:"$autor" },
+    {
+        $project:{
+            _id:0,
+            nombre:"$autor.nombre",
+            numeroLibros:1
+        }
+    }
+])
+
+14️⃣ Obtener el libro más caro junto con el nombre de su autor.
+
+db.libros_ref.aggregate([
+    {
+        $sort:{
+            "precio":-1
+        }
+    },
+    {$limit:1},
+    {
+        $lookup:{
+            from: "autores",
+            localField:"autores",
+            foreignField:"_id",
+            as: "autor"
+        }
+    },
+    {
+        $project:{
+            "titulo":1,
+            "precio":1,
+            "anioPublicacion":1,
+            "autor.nombre":1,
+            "_id":0
+        }
+    }
+])
+
+15️⃣ Mostrar las editoriales y el número total de autores distintos que han publicado en cada una.
+
+
+db.libros_ref.aggregate([
+    { $unwind:"$autores" },
+    {
+        $group:{
+            _id:"$editorial",
+            autoresDistintos: { $addToSet:"$autores" }
+        }
+    },
+    {
+        $project:{
+            editorial:"$_id",
+            numeroAutores: { $size:"$autoresDistintos" },
+            _id:0
+        }
+    }
+])
+(Esta es nivel examen serio)

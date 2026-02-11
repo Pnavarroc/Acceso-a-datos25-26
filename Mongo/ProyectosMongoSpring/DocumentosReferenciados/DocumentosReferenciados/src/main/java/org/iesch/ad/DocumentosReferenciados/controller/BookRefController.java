@@ -110,4 +110,69 @@ public class BookRefController {
     public ResponseEntity<List<BookRef>> buscarPorBaratosOantiguos(@RequestParam Double precio, @RequestParam Integer anio){
         return ResponseEntity.ok(bookRefRepository.buscarLibrosEconomicosOAntiguos(precio, anio));
     }
+
+
+    /*🔹 NIVEL 1 – Lookup básico
+1️⃣ Mostrar todos los libros junto con los datos completos de sus autores.
+
+👉 Solo $lookup.
+
+2️⃣ Mostrar solo:
+
+título
+
+precio
+
+nombre de los autores
+
+👉 $lookup + $project
+
+🔹 NIVEL 2 – Lookup + filtro
+3️⃣ Obtener libros cuyos autores sean de nacionalidad "España".
+
+👉 $lookup + $match
+
+4️⃣ Obtener libros cuyo autor se llame "George Orwell".
+
+👉 $lookup + $match
+
+5️⃣ Obtener libros publicados después del 2000 cuyos autores sean de "Estados Unidos".
+
+👉 $match + $lookup + $match
+
+(Ojo con el orden)
+
+🔥 NIVEL 3 – Con unwind
+6️⃣ Mostrar cada libro repetido por cada autor (uno por línea).
+
+👉 $lookup + $unwind
+
+7️⃣ Contar cuántos libros hay por nacionalidad de autor.
+
+👉 $lookup + $unwind + $group
+
+🔥 NIVEL 4 – Aggregate más interesante
+8️⃣ Obtener el autor que ha participado en más libros.
+
+👉 $unwind + $group + $sort + $limit + $lookup
+
+9️⃣ Calcular el precio promedio de los libros por nacionalidad del autor.
+
+👉 $lookup + $unwind + $group + $avg
+
+🔟 Mostrar las editoriales y el número total de autores distintos que han publicado en cada una.
+
+👉 $unwind + $group + $addToSet + $size
+
+(Esta es nivel notable alto)*/
+    //Consultas
+
+    /*título
+    precio
+    nobre de los autores*/
+
+    @GetMapping("/search")
+    public ResponseEntity<?> buscarLibrosYAutoresFiltrandoDatos(){
+        return ResponseEntity.ok(bookRefRepository.findLibrosConNombreAutor());
+    }
 }

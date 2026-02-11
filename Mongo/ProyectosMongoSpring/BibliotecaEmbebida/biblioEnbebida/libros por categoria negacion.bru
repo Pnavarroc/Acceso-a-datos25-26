@@ -1,0 +1,21 @@
+meta {
+  name: libros por categoria negacion
+  type: http
+  seq: 12
+}
+
+get {
+  url: http://127.0.0.1:8080/api/libros/search/paginas/precio?paginas=400&precio=30
+  body: none
+  auth: inherit
+}
+
+params:query {
+  paginas: 400
+  precio: 30
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

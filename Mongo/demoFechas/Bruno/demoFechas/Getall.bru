@@ -1,0 +1,20 @@
+meta {
+  name: Getall
+  type: http
+  seq: 3
+}
+
+get {
+  url: http://127.0.0.1:8080/eventos
+  body: none
+  auth: none
+}
+
+body:json {
+  {
+          "nombre": "Reunión de equipo",
+          "fecha": "2024-01-15",
+          "hora": "14:30:00",
+          "fechaHora": "2024-01-15T14:30:00"
+        }
+}
