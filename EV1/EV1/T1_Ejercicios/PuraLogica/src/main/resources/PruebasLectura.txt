@@ -1,0 +1,12 @@
+El desarrollo de software es un camino lleno de aprendizaje constante.
+Cuando escribimos código por primera vez, es completamente normal
+cometer un error de sintaxis que detenga la compilación. Al revisar las
+líneas del programa, descubres que un pequeño error de lógica puede cambiar
+todo el resultado esperado.No debes frustrarte, ya que cada error cometido es
+en realidad una oportunidad para mejorar tus habilidades. Los programadores
+experimentados saben que rastrear un error difícil puede tomar horas, pero la
+satisfacción de solucionarlo es enorme. Si tu aplicación lanza un error inesperado
+en producción, lo ideal es mantener la calma y revisar los registros del sistema.
+A veces, la prisa nos hace caer en el mismo error una y otra vez sin darnos cuenta.
+Por eso, documentar cada error superado te ayudará a ti y a tu equipo a no repetir los
+mismos fallos en el futuro.

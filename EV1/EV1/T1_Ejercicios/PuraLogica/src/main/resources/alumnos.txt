@@ -1,0 +1,6 @@
+1;Pablo;DAM;8.5;21
+2;Ana;ASIR;6.0;19
+3;Luis;DAM;4.2;17
+4;Marta;SMR;9.1;23
+5;Carlos;DAM;5.0;18
+6;Lucia;ASIR;7.7;20

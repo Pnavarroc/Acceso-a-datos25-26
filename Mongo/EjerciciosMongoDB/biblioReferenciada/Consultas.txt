@@ -280,3 +280,33 @@ db.libros_ref.aggregate([
     }
 ])
 (Esta es nivel examen serio)
+
+Mostrar solo titulo del libro, precio y nombre de los autores:
+
+db.libros_ref.aggregate([
+    {
+        $lookup:{
+            from : "autores",
+            localField:"autores",
+            foreignField: "_id",
+            as: "autor"
+        }
+    },
+    {
+        $project:{
+            "titulo":1,
+            "precio":1,
+            "autor.nombre":1,
+            "_id":0
+        }
+    }
+])
+
+Obtener libros publicados después del 2000 cuyos autores sean de "Estados Unidos".
+
+db.libros_ref.aggregation([
+    { $match:{ "anioPublicacion":{$gt: ?0} }},
+    {$lookup:{from : "autores",localField:"autores",foreignField: "_id",as: "autor" }},
+    {$match:{"autor.nacionalidad":{$gt: ?1}}}
+
+])
