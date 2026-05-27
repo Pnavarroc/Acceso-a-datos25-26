@@ -1,0 +1,21 @@
+meta {
+  name: findByDNI copy copy
+  type: http
+  seq: 7
+}
+
+get {
+  url: http://127.0.0.1:8080/api/vehiculos/buscar?marca=Seat&modelo=León
+  body: none
+  auth: inherit
+}
+
+params:query {
+  marca: Seat
+  modelo: León
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

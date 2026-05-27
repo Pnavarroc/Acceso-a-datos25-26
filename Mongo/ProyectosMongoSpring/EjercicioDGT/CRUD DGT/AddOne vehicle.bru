@@ -13,27 +13,70 @@ post {
 body:json {
   {
     "matricula": "9999ZZZ",
-    "bastidor": "TESTBAS987654321",
+    "bastidor": "TESTBASDORPOST0001",
     "marca": "Seat",
     "modelo": "Ibiza",
-    "color": "Rojo",
+    "color": "Azul",
     "tipoVehiculo": "TURISMO",
-    "anioFabricacion": 2024,
+    "anioFabricacion": 2021,
+    "fechaPrimeraMatriculacion": "2021-06-15T10:00:00Z",
     "caracteristicasTecnicas": {
       "cilindrada": 999,
-      "potencia": 95
+      "potencia": 95,
+      "numeroBastidores": "TESTBASDORPOST0001",
+      "combustible": "GASOLINA",
+      "emisiones": "EURO6",
+      "plazas": 5,
+      "pesoMaximo": 1600,
+      "tipoMotor": "Turbo"
     },
     "titular": {
       "dni": "12345678A",
-      "nombre": "Juan",
-      "apellidos": "Pérez"
+      "nombre": "Pedro",
+      "apellidos": "Navarro García",
+      "fechaNacimiento": "1998-04-12T00:00:00Z",
+      "email": "pedro.navarro@email.com",
+      "telefono": "600111222"
+    },
+    "domicilioFiscal": {
+      "calle": "Calle Falsa",
+      "numero": "123",
+      "piso": "2",
+      "puerta": "B",
+      "codigoPostal": "28001",
+      "localidad": "Madrid",
+      "provincia": "Madrid"
+    },
+    "situacionAdministrativa": {
+      "estado": "ACTIVO",
+      "fechaEstado": "2024-01-15T00:00:00Z",
+      "motivoBaja": null,
+      "fechaBajaTemporal": null,
+      "fechaFinBajaTemporal": null,
+      "precintado": false,
+      "fechaPrecinto": null,
+      "motivoPrecinto": null
     },
     "itv": {
       "enVigor": true,
-      "eITV": "e-ITV-2024-NEW-999999"
-    }
+      "fechaUltimaInspeccion": null,
+      "fechaCaducidad": "2025-06-15T00:00:00Z",
+      "resultado": null,
+      "numeroInforme": "e-ITV-2021-TEST-0001",
+      "eITV": "e-ITV-2021-TEST-0001",
+      "estacionITV": null
+    },
+    "multas": [],
+    "impuestos": {
+      "itmvPagado": true,
+      "fechaUltimoPagoITMV": "2024-01-15T00:00:00Z",
+      "importeITMV": 65.0,
+      "anioITMV": 2024
+    },
+    "historialTitulares": [],
+    "fechaCreacion": "2024-01-15T10:30:00Z",
+    "fechaActualizacion": "2024-01-15T10:30:00Z"
   }
-  
 }
 
 settings {
