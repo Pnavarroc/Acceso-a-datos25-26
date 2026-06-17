@@ -1,0 +1,24 @@
+info:
+  name: updateOne
+  type: http
+  seq: 4
+
+http:
+  method: PUT
+  url: http:127.0.0.1:8080/api/pacientes/1
+  body:
+    type: json
+    data: |-
+      {
+        "nombre": "Pablo Gimenez Gabarre",
+        "nif": "12345678A",
+        "telefono": "600111111",
+        "ciudad": "Teruel"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

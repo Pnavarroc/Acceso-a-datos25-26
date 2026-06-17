@@ -1,0 +1,8 @@
+Pan;Alimentacion;1.2;50
+Leche;Alimentacion;0.95;30
+Teclado;Informatica;25.99;10
+Raton;Informatica;12.5;0
+Monitor;Informatica;149.99;5
+Mesa;Hogar;89.99;2
+Silla;Hogar;45.5;8
+Agua;Alimentacion;0.6;100

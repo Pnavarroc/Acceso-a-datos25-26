@@ -1,0 +1,5 @@
+Pablo;DAM;7.5
+Mario;DAW;8.1
+Sara;DAM;9.0
+Hugo;ASIR;5.5
+Ivan;ASIR;6.7

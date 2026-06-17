@@ -1,0 +1,24 @@
+info:
+  name: updateOne
+  type: http
+  seq: 4
+
+http:
+  method: PUT
+  url: http://127.0.0.1:8080/api/clientes/1
+  body:
+    type: json
+    data: |-
+      {
+        "nif": "56232456A",
+        "nombre": "Pablo Camacho",
+        "ciudad": "Utiel",
+        "telefono": "656636369"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

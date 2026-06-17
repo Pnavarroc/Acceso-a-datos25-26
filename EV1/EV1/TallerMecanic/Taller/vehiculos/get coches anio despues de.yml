@@ -1,0 +1,19 @@
+info:
+  name: get coches anio despues de
+  type: http
+  seq: 9
+
+http:
+  method: GET
+  url: http://127.0.0.1:8080/api/vehiculos/por-anio?anio=2010
+  params:
+    - name: anio
+      value: "2010"
+      type: query
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

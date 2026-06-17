@@ -1,0 +1,26 @@
+info:
+  name: updateOne
+  type: http
+  seq: 4
+
+http:
+  method: PUT
+  url: http://127.0.0.1:8080/api/coches/1
+  body:
+    type: json
+    data: |-
+      {
+        "matricula": "5555555",
+        "marca": "Alfa CUmeo",
+        "modelo": "666",
+        "color": "Rojo",
+        "precio": 6000.0,
+        "cliente_id": 1
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

@@ -1,0 +1,10 @@
+INSERT INTO producto (id, nombre, precio, categoria, stock) VALUES (1, 'Leche', 1.20, 'Lácteos', 20);
+INSERT INTO producto (id, nombre, precio, categoria, stock) VALUES (2, 'Queso', 3.50, 'Lácteos', 5);
+INSERT INTO producto (id, nombre, precio, categoria, stock) VALUES (3, 'Pan', 0.90, 'Panadería', 30);
+INSERT INTO producto (id, nombre, precio, categoria, stock) VALUES (4, 'Jamón', 6.80, 'Charcutería', 8);
+INSERT INTO producto (id, nombre, precio, categoria, stock) VALUES (5, 'Coca Cola', 1.70, 'Bebidas', 0);
+INSERT INTO producto (id, nombre, precio, categoria, stock) VALUES (6, 'Agua', 0.60, 'Bebidas', 50);
+INSERT INTO producto (id, nombre, precio, categoria, stock) VALUES (7, 'Auriculares', 120.00, 'Electrónica', 10);
+INSERT INTO producto (id, nombre, precio, categoria, stock) VALUES (8, 'Teclado', 85.00, 'Electrónica', 6);
+INSERT INTO producto (id, nombre, precio, categoria, stock) VALUES (9, 'Chocolate', 2.40, 'Dulces', 12);
+INSERT INTO producto (id, nombre, precio, categoria, stock) VALUES (10, 'Café', 4.20, 'Bebidas', 7);

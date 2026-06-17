@@ -1,0 +1,7 @@
+info:
+  name: cochesPediciones
+  type: folder
+  seq: 2
+
+request:
+  auth: inherit

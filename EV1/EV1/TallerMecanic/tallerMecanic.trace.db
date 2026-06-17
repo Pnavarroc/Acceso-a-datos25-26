@@ -1,0 +1,20 @@
+2026-06-17 12:55:44.110678+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Conversión de datos fallida, convirtiendo "0 (REPARACION: ""FECHA"" DATE)"
+Data conversion error converting "0 (REPARACION: ""FECHA"" DATE)"; SQL statement:
+INSERT INTO reparacion(fecha,descripcion,coste,estado,vehiculo_id) VALUES(10/01/2022,'Se ha roto el turbo',1500.0,'PENDIENTE',1) [22018-240]
+2026-06-17 12:55:44.120679+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Conversión de datos fallida, convirtiendo "0 (REPARACION: ""FECHA"" DATE)"
+Data conversion error converting "0 (REPARACION: ""FECHA"" DATE)"; SQL statement:
+INSERT INTO reparacion(fecha,descripcion,coste,estado,vehiculo_id) VALUES(12/06/2025,'Cambio de aceite',100.0,'FINALIZADA',1) [22018-240]
+2026-06-17 12:55:44.122678+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Conversión de datos fallida, convirtiendo "0 (REPARACION: ""FECHA"" DATE)"
+Data conversion error converting "0 (REPARACION: ""FECHA"" DATE)"; SQL statement:
+INSERT INTO reparacion(fecha,descripcion,coste,estado,vehiculo_id) VALUES(15/05/2026,'Luna rota',1000.0,'EN_PROCESO',2) [22018-240]
+2026-06-17 12:55:44.124677+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Conversión de datos fallida, convirtiendo "0 (REPARACION: ""FECHA"" DATE)"
+Data conversion error converting "0 (REPARACION: ""FECHA"" DATE)"; SQL statement:
+INSERT INTO reparacion(fecha,descripcion,coste,estado,vehiculo_id) VALUES(10/06/2026,'Correa de distribucion',1500.0,'FINALIZADA',2) [22018-240]
+2026-06-17 12:55:44.128681+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Conversión de datos fallida, convirtiendo "0 (REPARACION: ""FECHA"" DATE)"
+Data conversion error converting "0 (REPARACION: ""FECHA"" DATE)"; SQL statement:
+INSERT INTO reparacion(fecha,descripcion,coste,estado,vehiculo_id) VALUES(17/06/2026,'Se ha roto el turbo',1500.0,'PENDIENTE',3) [22018-240]

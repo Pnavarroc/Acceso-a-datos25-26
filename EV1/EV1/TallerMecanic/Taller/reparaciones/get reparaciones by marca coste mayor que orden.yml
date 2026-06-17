@@ -1,0 +1,22 @@
+info:
+  name: get reparaciones by marca coste mayor que orden
+  type: http
+  seq: 6
+
+http:
+  method: GET
+  url: http://127.0.0.1:8080/api/reparaciones/por-marca-coste?marca=Seat&coste=200
+  params:
+    - name: marca
+      value: Seat
+      type: query
+    - name: coste
+      value: "200"
+      type: query
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

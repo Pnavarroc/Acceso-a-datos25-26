@@ -1,0 +1,8 @@
+Pablo;DAM;7.5
+Lucia;DAM;4.2
+Mario;DAW;8.1
+Sara;DAM;9.0
+Hugo;ASIR;5.5
+Nerea;DAW;3.8
+Ivan;ASIR;6.7
+Claudia;DAM;2.9

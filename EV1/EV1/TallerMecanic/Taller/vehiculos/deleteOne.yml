@@ -1,0 +1,27 @@
+info:
+  name: deleteOne
+  type: http
+  seq: 5
+
+http:
+  method: DELETE
+  url: http://127.0.0.1:8080/api/vehiculos/1
+  body:
+    type: json
+    data: |-
+      {
+        "matricula": "2577JKL",
+        "marca": "POllastre",
+        "modelo": "Alfa Romeo",
+        "anio": 2003,
+        "cliente": {
+          "id": 1
+        }
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
